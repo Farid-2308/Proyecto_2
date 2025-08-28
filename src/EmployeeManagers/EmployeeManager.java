@@ -20,7 +20,7 @@ public class EmployeeManager {
     }
 
     private boolean isValidPhone(String phone) {
-        return phone.matches("\\\\d{8}");
+        return phone.matches("^[2678][0-9]{7}$");
     }
 
     public void addEmployee(Employee e) throws Exception {

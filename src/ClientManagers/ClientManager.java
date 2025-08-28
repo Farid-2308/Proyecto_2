@@ -15,7 +15,6 @@ import java.util.regex.Pattern;
 public class ClientManager {
     private ArrayList<Client> clients = new ArrayList<>();
 
-    // Validations helpers
     private boolean isValidEmail(String email) {
         return Pattern.matches("^[\\w.-]+@[\\w.-]+\\.[A-Za-z]{2,6}$", email);
     }
@@ -24,7 +23,6 @@ public class ClientManager {
         return phone.matches("^[2678][0-9]{7}$");
     }
 
-    // Methods
     public void addClient(Client c) throws Exception {
         for (Client existing : clients) {
             if (existing.getId().equals(c.getId())) {
@@ -34,14 +32,17 @@ public class ClientManager {
         if (c.getAge() < 18) throw new Exception("El cliente debe ser mayor de edad");
         if (!isValidEmail(c.getEmail())) throw new Exception("formato de correo invalido");
         if (!isValidPhone(c.getPhone())) throw new Exception("El telefono debe ser de 8 digitos");
-        if (c.getLicense() == null || c.getLicense().isEmpty()) throw new Exception("Licencia requerida");
+        if (!isValidLicense(c.getLicense())) {
+            throw new Exception("La licencia debe tener 9 dígitos numéricos");
+        }
 
         clients.add(c);
     }
 
     public Client searchClient(String id) {
         for (Client c : clients) {
-            if (c.getId().equals(id)) return c;
+            if (c.getId().equals(id)) 
+                return c;
         }
         return null;
     }
@@ -54,6 +55,10 @@ public class ClientManager {
             c.setLicense(license);
         }
     }
+    
+    private boolean isValidLicense(String license) {
+    return license != null && license.matches("\\d{9}");
+}
 
     public void removeClient(String id) {
         clients.removeIf(c -> c.getId().equals(id));
