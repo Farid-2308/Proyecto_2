@@ -44,7 +44,7 @@ public class Reservation {
 
     public void setVehicule(Vehicule vehicule) {
         if (vehicule == null) throw new IllegalArgumentException("El vehículo no puede ser nulo");
-        if (!vehicule.getState().equals("Disponible"))
+        if (!vehicule.getStatus().equals("Disponible"))
             throw new IllegalArgumentException("El vehículo no está disponible para reservar");
         this.vehicule = vehicule;
     }
@@ -72,17 +72,5 @@ public class Reservation {
         this.EndDate = EndDate;
         this.confirm = confirm;
     }
-    
-//    Validaciones:
-//
-//Cliente no nulo.
-//
-//Vehículo disponible.
-//
-//Fecha inicio ≥ hoy.
-//
-//Fecha fin > inicio.
-//
-//Duración ≤ 30 días.
-    
+        
 }
