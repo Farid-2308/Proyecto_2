@@ -19,9 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class FrmContrato extends javax.swing.JFrame {
 
-private Gestores contractManager = new Gestores();
-private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
+    private Gestores contractManager = new Gestores();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmContrato.class.getName());
 
     /**
@@ -30,9 +28,16 @@ private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("
     public FrmContrato(ClientManager clientManager) {
         initComponents();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        configurarCamposFecha();
     }
 
-    
+    private void configurarCamposFecha() {
+        txtFechaInicio.setFormatterFactory(
+            new javax.swing.text.DefaultFormatterFactory(
+                new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))
+            )
+        );
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -108,7 +113,7 @@ private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("
 
         txtFechaInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat(""))));
 
-        txtFechaFinal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat(""))));
+        txtFechaFinal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
 
         jLabel5.setText("Placa");
 
@@ -304,8 +309,9 @@ private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("
 
             String id = txtIdContrato.getText();
             String plate = txtPlacaVehiculo.getText();
-            LocalDate start = LocalDate.parse(txtFechaInicio.getText());
-            LocalDate end = LocalDate.parse(txtFechaFinal.getText());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate start = LocalDate.parse(txtFechaInicio.getText(), formatter);
+            LocalDate end = LocalDate.parse(txtFechaFinal.getText(), formatter);
             double dailyRate = Double.parseDouble(txtTarifaDia.getText());
 
             RentalContract c = new RentalContract(id, clientId, plate, start, end, dailyRate);
