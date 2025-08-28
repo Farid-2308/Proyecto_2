@@ -57,4 +57,13 @@ public class VehiculeManager {
         vehicules.remove(placa);
     }
 
+    public Vehicule findAvailableVehiculeByType(Types type) {
+        for (Vehicule v : vehicules.values()) {
+            if (v.getType().equals(type) && v.getStatus().equals(Status.DISPONIBLE)) {
+                return v; 
+            }
+        }
+        return null; 
+    }
+    
 }
