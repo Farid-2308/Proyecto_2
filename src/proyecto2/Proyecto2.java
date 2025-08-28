@@ -4,6 +4,10 @@
  */
 package proyecto2;
 
+import ClientManagers.ClientManager;
+import GUI.FrmClientes;
+import GUI.FrmContrato;
+
 /**
  *
  * @author Farid
@@ -14,7 +18,13 @@ public class Proyecto2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        ClientManager clientManager = new ClientManager();
+
+        java.awt.EventQueue.invokeLater(() -> {
+            new FrmClientes(clientManager).setVisible(true);
+        });
+
+       FrmContrato contratoForm = new FrmContrato(clientManager);
+        contratoForm.setVisible(true);
     }
-    
 }

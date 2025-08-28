@@ -4,12 +4,15 @@
  */
 package GUI;
 
+import ClientManagers.ClientManager;
+
 /**
  *
  * @author Farid
  */
 public class FrmMenu extends javax.swing.JFrame {
-    
+
+    private ClientManager clientManager;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmMenu.class.getName());
 
     /**
@@ -17,6 +20,7 @@ public class FrmMenu extends javax.swing.JFrame {
      */
     public FrmMenu() {
         initComponents();
+        this.clientManager = clientManager;
     }
 
     /**
@@ -136,7 +140,7 @@ public class FrmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVehiculosActionPerformed
 
     private void btnContratosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContratosActionPerformed
-        FrmContrato FrmC = new FrmContrato();
+        FrmContrato FrmC = new FrmContrato(clientManager);
         FrmC.setVisible(true);
     }//GEN-LAST:event_btnContratosActionPerformed
 
@@ -146,7 +150,7 @@ public class FrmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEmpleadosActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        FrmClientes FrmCli = new FrmClientes();
+        FrmClientes FrmCli = new FrmClientes(clientManager);
         FrmCli.setVisible(true);
     }//GEN-LAST:event_btnClientesActionPerformed
 

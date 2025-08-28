@@ -11,54 +11,58 @@ import java.awt.HeadlessException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author mathy
  */
 public class FrmClientes extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmClientes.class.getName());
     private DefaultListModel<String> clientListModel = new DefaultListModel<>();
     private ClientManager clientManager;
+
     /**
      * Creates new form FrmClientes
      */
-    public FrmClientes() {
+    public FrmClientes(ClientManager clientmanager) {
         initComponents();
+        this.clientManager = clientManager;
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        clientManager = new ClientManager();
+        lstClientes.setModel(clientListModel);
+
         lstClientes.setModel(clientListModel);
         lstClientes.addListSelectionListener(e -> {
-        if (!e.getValueIsAdjusting()) {
-            String selected = lstClientes.getSelectedValue();
+            if (!e.getValueIsAdjusting()) {
+                String selected = lstClientes.getSelectedValue();
 
-            if (selected != null) {
-                String id = selected.split(" - ")[0];
-                Client c = clientManager.searchClient(id);
+                if (selected != null) {
+                    String id = selected.split(" - ")[0];
+                    Client c = clientManager.searchClient(id);
 
-                if (c != null) {
-                    txtCedula.setText(c.getId());
-                    txtNombre.setText(c.getName());
-                    txtFecha.setText(c.getBirthDate().toString());
-                    txtTelefono.setText(c.getPhone());
-                    txtCorreo.setText(c.getEmail());
-                    txtLicencia.setText(c.getLicense());
-                    txtCedula.setEditable(false);
-                    txtNombre.setEditable(false);
-                    txtFecha.setEditable(false);
+                    if (c != null) {
+                        txtCedula.setText(c.getId());
+                        txtNombre.setText(c.getName());
+                        txtFecha.setText(c.getBirthDate().toString());
+                        txtTelefono.setText(c.getPhone());
+                        txtCorreo.setText(c.getEmail());
+                        txtLicencia.setText(c.getLicense());
+                        txtCedula.setEditable(false);
+                        txtNombre.setEditable(false);
+                        txtFecha.setEditable(false);
+                    }
+                } else {
+                    limpiar();
                 }
-            } else {
-                limpiar();
             }
-        }
-    });
+        });
 
-    this.addMouseListener(new java.awt.event.MouseAdapter() {
-        @Override
-        public void mouseClicked(java.awt.event.MouseEvent e) {
-            lstClientes.clearSelection();
-        }
-    });
+        this.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                lstClientes.clearSelection();
+            }
+        });
     }
 
     /**
@@ -307,24 +311,24 @@ public class FrmClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFechaActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-            try {
-                String id = txtCedula.getText();
-                String name = txtNombre.getText();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate birth = LocalDate.parse(txtFecha.getText(), formatter);
-                String phone = txtTelefono.getText();
-                String email = txtCorreo.getText();
-                String license = txtLicencia.getText();
+        try {
+            String id = txtCedula.getText();
+            String name = txtNombre.getText();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate birth = LocalDate.parse(txtFecha.getText(), formatter);
+            String phone = txtTelefono.getText();
+            String email = txtCorreo.getText();
+            String license = txtLicencia.getText();
 
-                Client c = new Client(id, name, birth, phone, email, license);
-                clientManager.addClient(c);
+            Client c = new Client(id, name, birth, phone, email, license);
+            clientManager.addClient(c);
 
-                JOptionPane.showMessageDialog(this, "Cliente agregado");
-                refrescarLista();
-                limpiar();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
+            JOptionPane.showMessageDialog(this, "Cliente agregado");
+            refrescarLista();
+            limpiar();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -348,32 +352,35 @@ public class FrmClientes extends javax.swing.JFrame {
         for (Client c : clientManager.getClients()) {
             clientListModel.addElement(c.getId() + " - " + c.getName());
         }
-}
+    }
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FrmClientes().setVisible(true));
-    }
-    
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+//            logger.log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(() -> {
+//            ClientManager sharedClientManager = new ClientManager();
+//            new FrmClientes(sharedClientManager).setVisible(true);
+//        });
+//    }
     private void limpiar() {
         txtCedula.setText("");
         txtNombre.setText("");

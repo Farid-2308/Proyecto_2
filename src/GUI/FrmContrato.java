@@ -17,16 +17,18 @@ import javax.swing.JOptionPane;
  * @author Farid
  */
 public class FrmContrato extends javax.swing.JFrame {
+
     private Gestores contractManager = new Gestores();
     private ClientManager clientManager;
-   
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmContrato.class.getName());
 
     /**
      * Creates new form FrmContrato
      */
-    public FrmContrato() {
+    public FrmContrato(ClientManager clientManager) {
         initComponents();
+         this.clientManager = clientManager;
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         loadClientsIntoCombo();
     }
@@ -253,82 +255,82 @@ public class FrmContrato extends javax.swing.JFrame {
 
     private void loadClientsIntoCombo() {
         cmb_IdCliente.removeAllItems();
-    for (Client c : clientManager.getClients()) {
-        cmb_IdCliente.addItem(c.toString());
+        for (Client c : clientManager.getClients()) {
+            cmb_IdCliente.addItem(c.toString());
+        }
     }
-}
-    
+
     private void updateButtons(EstadoContrato status) {
-    switch (status) {
-        case ACTIVO:
-            btnCrear.setEnabled(false);
-            btnFinalizar.setEnabled(true);
-            btnCancelar.setEnabled(true);
-            break;
-        case FINALIZADO:
-        case CANCELADO:
-            btnCrear.setEnabled(false);
-            btnFinalizar.setEnabled(false);
-            btnCancelar.setEnabled(false);
-            break;
-        default: // Cuando aún no hay contrato cargado
-            btnCrear.setEnabled(true);
-            btnFinalizar.setEnabled(false);
-            btnCancelar.setEnabled(false);
-            break;
+        switch (status) {
+            case ACTIVO:
+                btnCrear.setEnabled(false);
+                btnFinalizar.setEnabled(true);
+                btnCancelar.setEnabled(true);
+                break;
+            case FINALIZADO:
+            case CANCELADO:
+                btnCrear.setEnabled(false);
+                btnFinalizar.setEnabled(false);
+                btnCancelar.setEnabled(false);
+                break;
+            default:
+                btnCrear.setEnabled(true);
+                btnFinalizar.setEnabled(false);
+                btnCancelar.setEnabled(false);
+                break;
+        }
     }
-}
-    
+
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         try {
-        String id = txtIdContrato.getText();
-        RentalContract c = contractManager.search(id);
+            String id = txtIdContrato.getText();
+            RentalContract c = contractManager.search(id);
 
-        if (c != null) {
-            c.cancelContract();
-            lblEstado.setText(c.getStatus().toString());
-            JOptionPane.showMessageDialog(this, "Contrato cancelado");
-            updateButtons(c.getStatus());
+            if (c != null) {
+                c.cancelContract();
+                lblEstado.setText(c.getStatus().toString());
+                JOptionPane.showMessageDialog(this, "Contrato cancelado");
+                updateButtons(c.getStatus());
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
         }
-    } catch (Exception ex) {
-        JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
-    }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         try {
-        Client selectedClient = (Client) cmb_IdCliente.getSelectedItem();
-        if (selectedClient == null) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente");
-            return;
+            Client selectedClient = (Client) cmb_IdCliente.getSelectedItem();
+            if (selectedClient == null) {
+                JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente");
+                return;
+            }
+            String clientId = selectedClient.getId();
+
+            // Datos del contrato
+            String id = txtIdContrato.getText();
+            String plate = txtPlacaVehiculo.getText();
+            LocalDate start = LocalDate.parse(txtFechaInicio.getText());
+            LocalDate end = LocalDate.parse(txtFechaFinal.getText());
+            double dailyRate = Double.parseDouble(txtTarifaDia.getText());
+
+            // Crear contrato
+            RentalContract c = new RentalContract(id, clientId, plate, start, end, dailyRate);
+
+            // Mostrar datos en la GUI
+            lblCantidadTotal.setText(String.valueOf(c.getTotalAmount())); // 👈 total a pagar
+            lblEstado.setText(c.getStatus().toString());                  // 👈 estado actual
+
+            // Guardar en ContractManager
+            contractManager.add(c);
+
+            JOptionPane.showMessageDialog(this, "Contrato creado con éxito");
+
+            // Actualizar botones según estado
+            updateButtons(c.getStatus());
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
         }
-        String clientId = selectedClient.getId();
-
-        // Datos del contrato
-        String id = txtIdContrato.getText();
-        String plate = txtPlacaVehiculo.getText();
-        LocalDate start = LocalDate.parse(txtFechaInicio.getText());
-        LocalDate end = LocalDate.parse(txtFechaFinal.getText());
-        double dailyRate = Double.parseDouble(txtTarifaDia.getText());
-
-        // Crear contrato
-        RentalContract c = new RentalContract(id, clientId, plate, start, end, dailyRate);
-
-        // Mostrar datos en la GUI
-        lblCantidadTotal.setText(String.valueOf(c.getTotalAmount())); // 👈 total a pagar
-        lblEstado.setText(c.getStatus().toString());                  // 👈 estado actual
-
-        // Guardar en ContractManager
-        contractManager.add(c);
-
-        JOptionPane.showMessageDialog(this, "Contrato creado con éxito");
-
-        // Actualizar botones según estado
-        updateButtons(c.getStatus());
-
-    } catch (Exception ex) {
-        JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
-    }
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
@@ -341,8 +343,8 @@ public class FrmContrato extends javax.swing.JFrame {
                 lblEstado.setText(c.getStatus().toString());
                 JOptionPane.showMessageDialog(this, "Contrato finalizado");
                 updateButtons(c.getStatus());
-                }
-            } catch (Exception ex) {
+            }
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnFinalizarActionPerformed
@@ -368,27 +370,27 @@ public class FrmContrato extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+//    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+//            logger.log(java.util.logging.Level.SEVERE, null, ex);
+//        }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FrmContrato().setVisible(true));
-    }
+//        java.awt.EventQueue.invokeLater(() -> new FrmContrato(clientManager).setVisible(true));
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
