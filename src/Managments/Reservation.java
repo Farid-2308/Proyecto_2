@@ -73,6 +73,16 @@ public class Reservation {
         this.confirm = confirm;
     }
     
-    
+//    Validaciones:
+//
+//Cliente no nulo.
+//
+//Vehículo disponible.
+//
+//Fecha inicio ≥ hoy.
+//
+//Fecha fin > inicio.
+//
+//Duración ≤ 30 días.
     
 }
