@@ -4,6 +4,7 @@
  */
 package Managments;
 
+import Managments.excepciones.VehiculoEnUsoException;
 import java.util.HashMap;
 
 /**
@@ -29,7 +30,7 @@ public class VehiculeManager {
         return vehicules.get(plate); 
     }
 
-    public void UpdateVehicule(String plate, String NewModel, String NewTipe, String NewState) {
+    public void UpdateVehicule(String plate, String NewModel, Types NewTipe, Status NewState) {
         Vehicule v = vehicules.get(plate);
         if (v == null) {
             throw new IllegalArgumentException("No se encontró vehículo con placa " + plate);
@@ -37,20 +38,20 @@ public class VehiculeManager {
         if (NewModel != null && !NewModel.isBlank()) {
             v.setModel(NewModel);
         }
-        if (NewTipe != null && !NewTipe.isBlank()) {
-            v.setTipe(NewTipe);
+        if (NewTipe != null) {
+            v.setType(NewTipe);
         }
-        if (NewState != null && !NewState.isBlank()) {
-            v.setState(NewState);
+        if (NewState != null) {
+            v.setStatus(NewState);
         }
     }
 
-    public void DeleteVehicule(String placa) {
+    public void DeleteVehicule(String placa) throws VehiculoEnUsoException{
         Vehicule v = vehicules.get(placa);
         if (v == null) {
             throw new IllegalArgumentException("No se encontró vehículo con placa " + placa);
         }
-        if (v.getState().equals("En alquiler")) {
+        if (v.getStatus().equals("En alquiler")) {
             throw new IllegalStateException("No se puede eliminar un vehículo que está en alquiler");
         }
         vehicules.remove(placa);

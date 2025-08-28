@@ -5,8 +5,7 @@
 package Managments;
 
 import java.time.Year;
-import java.util.Arrays;
-import java.util.List;
+
 
 /**
  *
@@ -17,13 +16,9 @@ public class Vehicule {
     private String brand;
     private String model;
     private int year;
-    private String tipe;
-    private String state;
+    private Types type;
+    private Status status;
 
-    
-    private static final List<String> VALID_TYPES = Arrays.asList("Sedán", "SUV", "Pick-up");
-    
-    private static final List<String> VALID_STATES = Arrays.asList("Disponible", "En alquiler", "En mantenimiento");
     
     public String getPlate() {
         return plate;
@@ -41,14 +36,22 @@ public class Vehicule {
         return year;
     }
 
-    public String getTipe() {
-        return tipe;
+    public Types getType() {
+        return type;
     }
 
-    public String getState() {
-        return state;
+    public Status getStatus() {
+        return status;
     }
 
+    public void setType(Types type) {
+        this.type = type;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+    
     public void setPlate(String plate) {
          if (plate == null || plate.isBlank())
             throw new IllegalArgumentException("La placa no puede estar vacía");
@@ -76,25 +79,15 @@ public class Vehicule {
         this.year = year;
     }
 
-    public void setTipe(String tipe) {
-       if (!VALID_TYPES.contains(tipe))
-            throw new IllegalArgumentException("Tipo inválido. Solo se permiten: " + VALID_TYPES);
-        this.tipe = tipe;
-    }
-
-    public void setState(String state) {
-        if (!VALID_STATES.contains(state))
-            throw new IllegalArgumentException("Estado inválido. Solo se permiten: " + VALID_STATES);
-        this.state = state;
-    }
-
-    public Vehicule(String plate, String brand, String model, int year, String tipe, String state) {
+ 
+    
+    public Vehicule(String plate, String brand, String model, int year, Types type, Status status) {
         this.plate = plate;
         this.brand = brand;
         this.model = model;
         this.year = year;
-        this.tipe = tipe;
-        this.state = state;
+        this.type = type;
+        this.status = status;
     }
     
     
