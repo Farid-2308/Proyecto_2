@@ -148,7 +148,7 @@ public class FrmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEmpleadosActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        FrmClientes FrmCli = new FrmClientes(clientManager);
+        FrmClientes FrmCli = new FrmClientes();
         FrmCli.setVisible(true);
     }//GEN-LAST:event_btnClientesActionPerformed
 

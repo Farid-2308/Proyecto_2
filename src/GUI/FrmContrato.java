@@ -10,6 +10,7 @@ import Contracts.Gestores;
 import Contracts.RentalContract;
 import Persons.Client;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,8 +19,8 @@ import javax.swing.JOptionPane;
  */
 public class FrmContrato extends javax.swing.JFrame {
 
-    private Gestores contractManager = new Gestores();
-    private ClientManager clientManager;
+private Gestores contractManager = new Gestores();
+private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmContrato.class.getName());
 
@@ -29,10 +30,10 @@ public class FrmContrato extends javax.swing.JFrame {
     public FrmContrato(ClientManager clientManager) {
         initComponents();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        this.clientManager = clientManager;
-        loadClientsIntoCombo(); 
     }
 
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,7 +66,7 @@ public class FrmContrato extends javax.swing.JFrame {
         lblCantidadTotal = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        cmb_IdCliente = new javax.swing.JComboBox<>();
+        txtIdCliente = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,9 +106,9 @@ public class FrmContrato extends javax.swing.JFrame {
 
         jLabel4.setText("Fecha Final");
 
-        txtFechaInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
+        txtFechaInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat(""))));
 
-        txtFechaFinal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
+        txtFechaFinal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat(""))));
 
         jLabel5.setText("Placa");
 
@@ -154,9 +155,9 @@ public class FrmContrato extends javax.swing.JFrame {
                                 .addGap(3, 3, 3)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cmb_IdCliente, 0, 105, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,9 +205,7 @@ public class FrmContrato extends javax.swing.JFrame {
                                             .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(cmb_IdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(18, 18, 18)))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
@@ -232,11 +231,14 @@ public class FrmContrato extends javax.swing.JFrame {
                                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtIdContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtPlacaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblCantidadTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(txtIdContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtPlacaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(lblCantidadTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -253,12 +255,6 @@ public class FrmContrato extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loadClientsIntoCombo() {
-        cmb_IdCliente.removeAllItems();
-        for (Client c : clientManager.getClients()) {
-            cmb_IdCliente.addItem(c.toString());
-        }
-    }
 
     private void updateButtons(EstadoContrato status) {
         switch (status) {
@@ -299,33 +295,25 @@ public class FrmContrato extends javax.swing.JFrame {
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         try {
-            Client selectedClient = (Client) cmb_IdCliente.getSelectedItem();
-            if (selectedClient == null) {
+            txtIdCliente.getText();
+            if (txtIdCliente == null) {
                 JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente");
                 return;
             }
-            String clientId = selectedClient.getId();
+            String clientId = txtIdCliente.getText();
 
-            // Datos del contrato
             String id = txtIdContrato.getText();
             String plate = txtPlacaVehiculo.getText();
             LocalDate start = LocalDate.parse(txtFechaInicio.getText());
             LocalDate end = LocalDate.parse(txtFechaFinal.getText());
             double dailyRate = Double.parseDouble(txtTarifaDia.getText());
 
-            // Crear contrato
             RentalContract c = new RentalContract(id, clientId, plate, start, end, dailyRate);
 
-            // Mostrar datos en la GUI
-            lblCantidadTotal.setText(String.valueOf(c.getTotalAmount())); // 👈 total a pagar
-            lblEstado.setText(c.getStatus().toString());                  // 👈 estado actual
-
-            // Guardar en ContractManager
+            lblCantidadTotal.setText(String.valueOf(c.getTotalAmount()));
+            lblEstado.setText(c.getStatus().toString());
             contractManager.add(c);
-
             JOptionPane.showMessageDialog(this, "Contrato creado con éxito");
-
-            // Actualizar botones según estado
             updateButtons(c.getStatus());
 
         } catch (Exception ex) {
@@ -367,15 +355,15 @@ public class FrmContrato extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+//    /**
+//     * @param args the command line arguments
+//     */
 //    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+//    /* Set the Nimbus look and feel */
+////    <editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//     */
 //        try {
 //            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 //                if ("Nimbus".equals(info.getName())) {
@@ -386,9 +374,9 @@ public class FrmContrato extends javax.swing.JFrame {
 //        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
 //            logger.log(java.util.logging.Level.SEVERE, null, ex);
 //        }
-        //</editor-fold>
-
-        /* Create and display the form */
+////    </editor-fold>
+//
+//    /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(() -> new FrmContrato(clientManager).setVisible(true));
 //    }
 
@@ -397,7 +385,6 @@ public class FrmContrato extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnFinalizar;
-    private javax.swing.JComboBox<String> cmb_IdCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -414,6 +401,7 @@ public class FrmContrato extends javax.swing.JFrame {
     private javax.swing.JLabel lblEstado;
     private javax.swing.JFormattedTextField txtFechaFinal;
     private javax.swing.JFormattedTextField txtFechaInicio;
+    private javax.swing.JTextField txtIdCliente;
     private javax.swing.JTextField txtIdContrato;
     private javax.swing.JTextField txtPlacaVehiculo;
     private javax.swing.JTextField txtTarifaDia;
