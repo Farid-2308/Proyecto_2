@@ -47,6 +47,11 @@ public class FrmMenu extends javax.swing.JFrame {
         btnVehiculos.setForeground(new java.awt.Color(0, 0, 0));
         btnVehiculos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ImagenVehiculos.jpg"))); // NOI18N
         btnVehiculos.setText("Vehiculos");
+        btnVehiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVehiculosActionPerformed(evt);
+            }
+        });
 
         btnEmpleados.setBackground(new java.awt.Color(255, 255, 255));
         btnEmpleados.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -65,6 +70,11 @@ public class FrmMenu extends javax.swing.JFrame {
         btnContratos.setForeground(new java.awt.Color(0, 0, 0));
         btnContratos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ImagenContrato.jpg"))); // NOI18N
         btnContratos.setText("Contratos");
+        btnContratos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContratosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,6 +114,16 @@ public class FrmMenu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculosActionPerformed
+        FrmVehiculos FrmV = new FrmVehiculos();
+        FrmV.setVisible(true);
+    }//GEN-LAST:event_btnVehiculosActionPerformed
+
+    private void btnContratosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContratosActionPerformed
+        FrmContrato FrmC = new FrmContrato();
+        FrmC.setVisible(true);
+    }//GEN-LAST:event_btnContratosActionPerformed
 
     /**
      * @param args the command line arguments
