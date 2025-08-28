@@ -27,7 +27,7 @@ public class FrmClientes extends javax.swing.JFrame {
      */
     public FrmClientes(ClientManager clientmanager) {
         initComponents();
-        this.clientManager = clientManager;
+        //this.clientManager = clientManager;
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         lstClientes.setModel(clientListModel);
 
@@ -311,7 +311,7 @@ public class FrmClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFechaActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        try {
+//        try {
             String id = txtCedula.getText();
             String name = txtNombre.getText();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -321,14 +321,16 @@ public class FrmClientes extends javax.swing.JFrame {
             String license = txtLicencia.getText();
 
             Client c = new Client(id, name, birth, phone, email, license);
-            clientManager.addClient(c);
+            if (!clientManager.addClient(c)) {
+                
+            }
 
             JOptionPane.showMessageDialog(this, "Cliente agregado");
             refrescarLista();
             limpiar();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
+//        } catch (Exception ex) {
+//            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed

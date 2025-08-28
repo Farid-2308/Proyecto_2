@@ -28,9 +28,9 @@ public class FrmContrato extends javax.swing.JFrame {
      */
     public FrmContrato(ClientManager clientManager) {
         initComponents();
-         this.clientManager = clientManager;
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        loadClientsIntoCombo();
+        this.clientManager = clientManager;
+        loadClientsIntoCombo(); 
     }
 
     /**

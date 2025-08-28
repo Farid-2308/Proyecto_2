@@ -11,8 +11,7 @@ import ClientManagers.ClientManager;
  * @author Farid
  */
 public class FrmMenu extends javax.swing.JFrame {
-
-    private ClientManager clientManager;
+    private ClientManager clientManager = new ClientManager();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmMenu.class.getName());
 
     /**
@@ -20,7 +19,6 @@ public class FrmMenu extends javax.swing.JFrame {
      */
     public FrmMenu() {
         initComponents();
-        this.clientManager = clientManager;
     }
 
     /**
