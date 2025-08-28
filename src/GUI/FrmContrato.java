@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 public class FrmContrato extends javax.swing.JFrame {
     private Gestores contractManager = new Gestores();
     private ClientManager clientManager;
-    private javax.swing.JComboBox<Client> cmbClienteId;
+   
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmContrato.class.getName());
 
     /**
@@ -114,8 +114,6 @@ public class FrmContrato extends javax.swing.JFrame {
         jLabel7.setText("Cantidad a Pagar");
 
         jLabel8.setText("Estado");
-
-        cmb_IdCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -254,9 +252,9 @@ public class FrmContrato extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loadClientsIntoCombo() {
-        cmb_IdCliente.removeAllItems(); // ✅ ahora sí funciona
+        cmb_IdCliente.removeAllItems();
     for (Client c : clientManager.getClients()) {
-        cmbClienteId.addItem(c);
+        cmb_IdCliente.addItem(c);
     }
 }
     
