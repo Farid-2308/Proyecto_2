@@ -5,72 +5,62 @@
 package Managments;
 
 import java.time.LocalDate;
-import Persons.Client;
 /**
  *
  * @author Jorge
  */
 public class Reservation {
-    private Client client;
-    private Vehicule vehicule;
-    private LocalDate StartDate;
-    private LocalDate EndDate;
-    private boolean confirm;
+    private String id;
+    private String clientId;
+    private String vehiclePlate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
-    public Client getClient() {
-        return client;
+    public Reservation(String id, String clientId, String vehiclePlate, LocalDate startDate, LocalDate endDate) {
+        this.id = id;
+        this.clientId = clientId;
+        this.vehiclePlate = vehiclePlate;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
-    public Vehicule getVehicule() {
-        return vehicule;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public String getVehiclePlate() {
+        return vehiclePlate;
+    }
+
+    public void setVehiclePlate(String vehiclePlate) {
+        this.vehiclePlate = vehiclePlate;
     }
 
     public LocalDate getStartDate() {
-        return StartDate;
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
     public LocalDate getEndDate() {
-        return EndDate;
+        return endDate;
     }
 
-    public boolean isConfirm() {
-        return confirm;
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
-
-    public void setClient(Client client) {
-        if (client == null) throw new IllegalArgumentException("El cliente no puede ser nulo");
-        this.client = client;
-    }
-
-    public void setVehicule(Vehicule vehicule) {
-        if (vehicule == null) throw new IllegalArgumentException("El vehículo no puede ser nulo");
-        if (!vehicule.getStatus().equals("Disponible"))
-            throw new IllegalArgumentException("El vehículo no está disponible para reservar");
-        this.vehicule = vehicule;
-    }
-
-    public void setStartDate(LocalDate StartDate) {
-         if (StartDate.isBefore(LocalDate.now()))
-            throw new IllegalArgumentException("La fecha de inicio no puede ser anterior a hoy");
-        this.StartDate = StartDate;
-    }
-
-    public void setEndDate(LocalDate EndDate) {
-        if (EndDate.isBefore(StartDate))
-            throw new IllegalArgumentException("La fecha de fin debe ser posterior a la de inicio");
-        this.EndDate = EndDate;
-    }
-
-    public void setConfirm(boolean confirm) {
-        this.confirm = confirm;
-    }
-
-    public Reservation(Client client, Vehicule vehicule, LocalDate StartDate, LocalDate EndDate, boolean confirm) {
-        this.client = client;
-        this.vehicule = vehicule;
-        this.StartDate = StartDate;
-        this.EndDate = EndDate;
-        this.confirm = confirm;
-    }
-        
 }
