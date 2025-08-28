@@ -5,7 +5,7 @@
 package Managments;
 
 import java.time.LocalDate;
-
+import Persons.Client;
 /**
  *
  * @author Jorge
