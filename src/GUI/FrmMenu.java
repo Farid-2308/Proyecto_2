@@ -28,27 +28,78 @@ public class FrmMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        btnClientes = new javax.swing.JButton();
+        btnVehiculos = new javax.swing.JButton();
+        btnEmpleados = new javax.swing.JButton();
+        btnReservas = new javax.swing.JButton();
+        btnContratos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("jLabel1");
+        btnClientes.setBackground(new java.awt.Color(255, 255, 255));
+        btnClientes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnClientes.setForeground(new java.awt.Color(0, 0, 0));
+        btnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ImagenClientes.jpg"))); // NOI18N
+        btnClientes.setText("Clientes");
+
+        btnVehiculos.setBackground(new java.awt.Color(255, 255, 255));
+        btnVehiculos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnVehiculos.setForeground(new java.awt.Color(0, 0, 0));
+        btnVehiculos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ImagenVehiculos.jpg"))); // NOI18N
+        btnVehiculos.setText("Vehiculos");
+
+        btnEmpleados.setBackground(new java.awt.Color(255, 255, 255));
+        btnEmpleados.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnEmpleados.setForeground(new java.awt.Color(0, 0, 0));
+        btnEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ImagenEmpleados.jpg"))); // NOI18N
+        btnEmpleados.setText("Empleados");
+
+        btnReservas.setBackground(new java.awt.Color(255, 255, 255));
+        btnReservas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnReservas.setForeground(new java.awt.Color(0, 0, 0));
+        btnReservas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ImagenReserva.jpg"))); // NOI18N
+        btnReservas.setText("Reservas");
+
+        btnContratos.setBackground(new java.awt.Color(255, 255, 255));
+        btnContratos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnContratos.setForeground(new java.awt.Color(0, 0, 0));
+        btnContratos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ImagenContrato.jpg"))); // NOI18N
+        btnContratos.setText("Contratos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(268, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEmpleados))
+                        .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnContratos, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                            .addComponent(btnReservas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(113, 113, 113)
+                        .addComponent(btnVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
-                .addContainerGap(261, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnClientes)
+                    .addComponent(btnContratos, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnReservas, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                    .addComponent(btnEmpleados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -80,6 +131,10 @@ public class FrmMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnClientes;
+    private javax.swing.JButton btnContratos;
+    private javax.swing.JButton btnEmpleados;
+    private javax.swing.JButton btnReservas;
+    private javax.swing.JButton btnVehiculos;
     // End of variables declaration//GEN-END:variables
 }
