@@ -50,7 +50,7 @@ public class ReservationManager {
     public Reservation confirmReservation(String id) {
         Reservation reservation = searchReservation(id);
         if (reservation != null) {
-            reservationQueue.remove(reservation); // Eliminar de la cola de reservas pendientes
+            reservationQueue.remove(reservation); 
             return reservation;
         }
         return null;

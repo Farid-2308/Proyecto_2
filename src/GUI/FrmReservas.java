@@ -81,6 +81,8 @@ public class FrmReservas extends javax.swing.JFrame {
 
         txtFechaInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
 
+        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SEDAN", "SUV", "PICKUP" }));
+
         jLabel1.setText("Tipo");
 
         btnCrear.setText("Crear");
@@ -227,7 +229,6 @@ public class FrmReservas extends javax.swing.JFrame {
             String idReserva = txtReserva.getText();
             Types nuevoTipo = Types.valueOf(cmbTipo.getSelectedItem().toString());
 
-            // Asumiendo que ReservationManager tiene un método para modificar el vehículo
             reservaManager.modificarVehiculo(idReserva, nuevoTipo);
 
             JOptionPane.showMessageDialog(this, "Vehículo de la reserva modificado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);

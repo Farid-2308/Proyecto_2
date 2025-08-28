@@ -36,19 +36,16 @@ public class FrmVehiculos extends javax.swing.JFrame {
             Vehicule v = manager.SearchVehicule(plate);
 
             if (v != null) {
-                // Llenar los campos del formulario con los datos del vehículo encontrado
                 txtMarca.setText(v.getBrand());
                 txtModelo.setText(v.getModel());
                 txtAnio.setText(String.valueOf(v.getYear()));
 
-                // Llenar los JComboBox
                 cmbTipo.setSelectedItem(v.getType().toString());
                 cmbEstado.setSelectedItem(v.getStatus().toString());
 
                 JOptionPane.showMessageDialog(this, "Vehículo encontrado y datos cargados.");
             } else {
                 JOptionPane.showMessageDialog(this, "Vehículo no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
-                // Limpiar los campos si el vehículo no se encuentra
                 txtMarca.setText("");
                 txtModelo.setText("");
                 txtAnio.setText("");
