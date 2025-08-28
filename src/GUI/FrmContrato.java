@@ -254,7 +254,7 @@ public class FrmContrato extends javax.swing.JFrame {
     private void loadClientsIntoCombo() {
         cmb_IdCliente.removeAllItems();
     for (Client c : clientManager.getClients()) {
-        cmb_IdCliente.addItem(c);
+        cmb_IdCliente.addItem(c.toString());
     }
 }
     
