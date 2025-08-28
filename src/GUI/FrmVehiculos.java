@@ -26,6 +26,8 @@ public class FrmVehiculos extends javax.swing.JFrame {
      */
     public FrmVehiculos() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
     }
 
     public void buscarVehiculo() {

@@ -31,6 +31,8 @@ public class FrmReservas extends javax.swing.JFrame {
         this.clientManager = clientManager;
         this.vehiculeManager = vehiculeManager;
         this.reservaManager = new ReservationManager(clientManager, vehiculeManager);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
     }
 
     private void limpiarCampos() {

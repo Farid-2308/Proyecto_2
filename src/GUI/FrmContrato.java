@@ -4,9 +4,11 @@
  */
 package GUI;
 
+import ClientManagers.ClientManager;
 import Contracts.EstadoContrato;
 import Contracts.Gestores;
 import Contracts.RentalContract;
+import Persons.Client;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
@@ -16,6 +18,8 @@ import javax.swing.JOptionPane;
  */
 public class FrmContrato extends javax.swing.JFrame {
     private Gestores contractManager = new Gestores();
+    private ClientManager clientManager;
+    private javax.swing.JComboBox<Client> cmbClienteId;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmContrato.class.getName());
 
     /**
@@ -23,6 +27,8 @@ public class FrmContrato extends javax.swing.JFrame {
      */
     public FrmContrato() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        loadClientsIntoCombo();
     }
 
     /**
@@ -35,7 +41,6 @@ public class FrmContrato extends javax.swing.JFrame {
     private void initComponents() {
 
         txtIdContrato = new javax.swing.JTextField();
-        txtIdCliente = new javax.swing.JTextField();
         txtPlacaVehiculo = new javax.swing.JTextField();
         txtTarifaDia = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -58,6 +63,7 @@ public class FrmContrato extends javax.swing.JFrame {
         lblCantidadTotal = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        cmb_IdCliente = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,13 +107,15 @@ public class FrmContrato extends javax.swing.JFrame {
 
         txtFechaFinal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
 
-        jLabel5.setText("ID Cliente");
+        jLabel5.setText("Placa");
 
         jLabel6.setText("Tarifa Diaria");
 
         jLabel7.setText("Cantidad a Pagar");
 
         jLabel8.setText("Estado");
+
+        cmb_IdCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,8 +155,8 @@ public class FrmContrato extends javax.swing.JFrame {
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtIdCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmb_IdCliente, 0, 105, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -192,12 +200,14 @@ public class FrmContrato extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18))
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                             .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(cmb_IdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(18, 18, 18)))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -223,9 +233,7 @@ public class FrmContrato extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txtIdContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtPlacaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtPlacaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(lblCantidadTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -245,6 +253,13 @@ public class FrmContrato extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void loadClientsIntoCombo() {
+        cmb_IdCliente.removeAllItems(); // ✅ ahora sí funciona
+    for (Client c : clientManager.getClients()) {
+        cmbClienteId.addItem(c);
+    }
+}
+    
     private void updateButtons(EstadoContrato status) {
     switch (status) {
         case ACTIVO:
@@ -284,22 +299,35 @@ public class FrmContrato extends javax.swing.JFrame {
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         try {
+        Client selectedClient = (Client) cmb_IdCliente.getSelectedItem();
+        if (selectedClient == null) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente");
+            return;
+        }
+        String clientId = selectedClient.getId();
+
+        // Datos del contrato
         String id = txtIdContrato.getText();
-        String client = txtIdCliente.getText();
         String plate = txtPlacaVehiculo.getText();
-        LocalDate start = LocalDate.parse(txtFechaInicio.getText()); // formato YYYY-MM-DD
+        LocalDate start = LocalDate.parse(txtFechaInicio.getText());
         LocalDate end = LocalDate.parse(txtFechaFinal.getText());
         double dailyRate = Double.parseDouble(txtTarifaDia.getText());
 
-        RentalContract c = new RentalContract(id, client, plate, start, end, dailyRate);
-        lblEstado.setText(String.valueOf(c.getTotalAmount()));
-        lblEstado.setText(c.getStatus().toString());
+        // Crear contrato
+        RentalContract c = new RentalContract(id, clientId, plate, start, end, dailyRate);
 
-        contractManager.list().add(c);
+        // Mostrar datos en la GUI
+        lblCantidadTotal.setText(String.valueOf(c.getTotalAmount())); // 👈 total a pagar
+        lblEstado.setText(c.getStatus().toString());                  // 👈 estado actual
+
+        // Guardar en ContractManager
+        contractManager.add(c);
 
         JOptionPane.showMessageDialog(this, "Contrato creado con éxito");
 
+        // Actualizar botones según estado
         updateButtons(c.getStatus());
+
     } catch (Exception ex) {
         JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
     }
@@ -326,7 +354,6 @@ public class FrmContrato extends javax.swing.JFrame {
         RentalContract c = contractManager.search(id);
 
         if (c != null) {
-            txtIdCliente.setText(c.getClientId());
             txtPlacaVehiculo.setText(c.getVehiclePlate());
             txtFechaInicio.setText(c.getStartDate().toString());
             txtFechaFinal.setText(c.getEndDate().toString());
@@ -370,6 +397,7 @@ public class FrmContrato extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnFinalizar;
+    private javax.swing.JComboBox<String> cmb_IdCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -386,7 +414,6 @@ public class FrmContrato extends javax.swing.JFrame {
     private javax.swing.JLabel lblEstado;
     private javax.swing.JFormattedTextField txtFechaFinal;
     private javax.swing.JFormattedTextField txtFechaInicio;
-    private javax.swing.JTextField txtIdCliente;
     private javax.swing.JTextField txtIdContrato;
     private javax.swing.JTextField txtPlacaVehiculo;
     private javax.swing.JTextField txtTarifaDia;

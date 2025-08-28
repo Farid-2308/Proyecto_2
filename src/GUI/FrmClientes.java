@@ -25,6 +25,7 @@ public class FrmClientes extends javax.swing.JFrame {
      */
     public FrmClientes() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         clientManager = new ClientManager();
         lstClientes.setModel(clientListModel);
         lstClientes.addListSelectionListener(e -> {

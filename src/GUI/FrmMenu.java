@@ -41,6 +41,11 @@ public class FrmMenu extends javax.swing.JFrame {
         btnClientes.setForeground(new java.awt.Color(0, 0, 0));
         btnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ImagenClientes.jpg"))); // NOI18N
         btnClientes.setText("Clientes");
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientesActionPerformed(evt);
+            }
+        });
 
         btnVehiculos.setBackground(new java.awt.Color(255, 255, 255));
         btnVehiculos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -58,12 +63,22 @@ public class FrmMenu extends javax.swing.JFrame {
         btnEmpleados.setForeground(new java.awt.Color(0, 0, 0));
         btnEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ImagenEmpleados.jpg"))); // NOI18N
         btnEmpleados.setText("Empleados");
+        btnEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmpleadosActionPerformed(evt);
+            }
+        });
 
         btnReservas.setBackground(new java.awt.Color(255, 255, 255));
         btnReservas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnReservas.setForeground(new java.awt.Color(0, 0, 0));
         btnReservas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ImagenReserva.jpg"))); // NOI18N
         btnReservas.setText("Reservas");
+        btnReservas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReservasActionPerformed(evt);
+            }
+        });
 
         btnContratos.setBackground(new java.awt.Color(255, 255, 255));
         btnContratos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -124,6 +139,21 @@ public class FrmMenu extends javax.swing.JFrame {
         FrmContrato FrmC = new FrmContrato();
         FrmC.setVisible(true);
     }//GEN-LAST:event_btnContratosActionPerformed
+
+    private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
+        FrmEmpleados FrmE = new FrmEmpleados();
+        FrmE.setVisible(true);
+    }//GEN-LAST:event_btnEmpleadosActionPerformed
+
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
+        FrmClientes FrmCli = new FrmClientes();
+        FrmCli.setVisible(true);
+    }//GEN-LAST:event_btnClientesActionPerformed
+
+    private void btnReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservasActionPerformed
+        FrmReservas FrmR = new FrmReservas();
+        FrmR.setVisible(true);
+    }//GEN-LAST:event_btnReservasActionPerformed
 
     /**
      * @param args the command line arguments

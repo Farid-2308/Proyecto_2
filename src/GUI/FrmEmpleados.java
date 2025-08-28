@@ -26,6 +26,7 @@ public class FrmEmpleados extends javax.swing.JFrame {
      */
     public FrmEmpleados() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         employeeManager = new EmployeeManager();
         for (Employee e : employeeManager.getEmployees()) {
             employeeListModel.addElement(e.getId() + " - " + e.getName());
